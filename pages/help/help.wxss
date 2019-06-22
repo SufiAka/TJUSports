@@ -1,0 +1,5 @@
+/* example/panel/panel.wxss */
+.image_show{
+  display:flex;
+  justify-content: center;
+}

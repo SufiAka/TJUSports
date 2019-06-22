@@ -1,0 +1,43 @@
+<view class="page">
+  <template name="msgTemp">
+    <view class="page__hd">
+      <view class="page__title">{{title}}</view>
+      <view class="page__desc">View more面板</view>
+    </view>
+
+    <view class="weui-panel">
+      <view class="weui-panel__bd">
+        <view class="weui-cell__hd">
+          <view class="image_show">
+            <image src="{{src}}" style="margin-top:10px;margin-left:10px" mode="widthFix" bindtap="previewImage" />
+          </view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">{{title}}</view>
+          <view class="weui-article__p">{{text}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">Price: {{jiage}}$</view>
+          </view>
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">Condition: {{time}}</view>
+          </view>
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">Sold: 已售{{xiaoliang}}个</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </template>
+  <view class="page__bd">
+    <template is="msgTemp" wx:for="{{deList}}" wx:key="id" data="{{...item}}" />
+    <view class="userinfo">
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="want">I want this!</button>
+    </view>
+  </view>
+</view>

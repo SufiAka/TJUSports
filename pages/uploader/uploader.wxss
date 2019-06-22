@@ -1,0 +1,7 @@
+/* example/uploader/uploader.wxss */
+.image_cancel{
+    position:relative;
+    top:-92px;
+    right:-68px;
+    z-index:800;
+}

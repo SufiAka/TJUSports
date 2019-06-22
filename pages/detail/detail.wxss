@@ -1,0 +1,23 @@
+/* example/panel/panel.wxss */
+.image_show{
+  display:flex;
+  justify-content: center;
+}
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+}
+
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  margin-top: 20px;
+  font-size: 20px;
+  color: rgb(73, 23, 192);
+}

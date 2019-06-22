@@ -1,0 +1,56 @@
+<view class="page">
+  <view class="page__bd">
+    <template name="msgTemp">
+      <view class="page__bd">
+        <view class="weui-panel">
+          <view class="weui-panel__bd">
+            <view class="weui-cell__hd">
+              <view class="imageshow">
+                <image src="{{src}}" style="margin-top:10px;margin-bottom:10px" mode="widthFix" />
+              </view>
+            </view>
+            <view class="weui-media-box weui-media-box_text">
+              <view class="weui-media-box__title weui-media-box__title_in-text">{{title}}</view>
+              <view class="weui-media-box__desc">{{text_simple}}</view>
+              <view class="weui-media-box__info">
+                <view class="weui-media-box__info__meta">{{jiage}}$</view>
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{time}}</view>
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">Sold:{{xiaoliang}}</view>
+              </view>
+
+            </view>
+          </view>
+          <view class="weui-panel__ft">
+            <view class="weui-cell weui-cell_access weui-cell_link" bindtap="seemore" data-name="{{id}}">
+              <view class="weui-cell__bd">View more</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{edit}}" bindtap="editList" data-name="{{id}}">
+              <view class="weui-cell__bd">Edit</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <view class="weui-cell weui-cell_access weui-cell_link" bindtap="delList" data-name="{{id}}">
+              <view class="weui-cell__bd">Delete</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+          </view>
+
+        </view>
+
+      </view>
+    </template>
+    <template is="msgTemp" wx:for="{{msgList}}" wx:key="id" data="{{...item}}" />
+
+    <view class="weui-footer">
+      <view class="page__ft">
+        <image src="../../pages/example/images/icon_footer.png" style="width: 160px; height: 53px;"></image>
+
+
+        <view class="weui-footer__links">
+          <navigator url="../help/help" class="weui-footer__link">Contact us</navigator>
+        </view>
+        <view class="weui-footer__text">Copyright © 2019-2020 TJU.sport</view>
+      </view>
+    </view>
+  </view>
+</view>

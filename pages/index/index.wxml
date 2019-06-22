@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="page__bd1">
+
+  <view class="container">
+    <view class="userinfo">
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="margin-top:50px">Get User Info</button>
+      <block wx:else>
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" style="margin-top:50px"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+  </view>
+  <view class="weui-cell_warn index_warn" wx:if="{{!hasUserInfo && canIUse}}">Please get user info first</view>
+  <block wx:else>
+  <view class="start">
+    <image bindtap="bindViewTap" src="../../images/start.png" style="width: 200rpx; height: 100rpx;"></image>
+  </view>
+  </block>
+
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  <view class="page__bd2">
+    <view class="weui-footer_fixed-bottom">
+      <view class="page__ft">
+        <image src="../../pages/example/images/icon_footer.png" style="width: 160px; height: 53px;"></image>
+      </view>
+    </view>
+  </view>
+
+</view>

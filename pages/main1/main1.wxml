@@ -1,0 +1,240 @@
+<!--main.wxml-->
+
+<view class="page">
+  <view class="page__background">
+    <view class="weui-tab">
+      <view class="weui-navbar" style="position: fixed; top: 0;">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+
+
+      <view class="weui-tab__panel">
+        <view hidden="{{activeIndex != 0}}">
+
+          <view class="page" style="margin-top:15px">
+            <view class="userinfo">
+              <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">Get User Info</button>
+              <block wx:else>
+                <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+                <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+              </block>
+            </view>
+
+            <view class="page__bd page__bd_spacing" style="margin-top:10px">
+              <view class="kind-list">
+                <block wx:for="{{list1}}" wx:key="id">
+                  <view class="kind-list__item">
+                    <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle1">
+                      <view class="weui-flex__item">{{item.name}}</view>
+                      <image class="kind-list__img" src="../../pages/example/images/icon_nav_{{item.id}}.png"></image>
+                    </view>
+                    <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
+                      <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
+                        <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*this">
+                          <navigator url="../../pages/{{page}}/{{page}}" class="weui-cell weui-cell_access">
+                            <view class="weui-cell__bd">{{page}}</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                          </navigator>
+                        </block>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+              </view>
+            </view>
+            <template name="usrTemp">
+              <view class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="{{src}}" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__info">
+                    <view class="weui-cell_link weui-media-box__info__meta">{{name}}</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{time}}</view>
+                  </view>
+                  <view class="weui-media-box__title_in">{{title}}</view>
+                  <view class="weui-media-box__desc">{{text}}</view>
+                </view>
+              </view>
+            </template>
+            <view class="page__bd page__bd_spacing">
+              <view class="weui-panel">
+                <template is="usrTemp" wx:for="{{usrList}}" wx:key="id" data="{{...item}}" />
+              </view>
+            </view>
+            <view class="page__ft">
+              <image src="../../pages/example/images/icon_footer.png" style="width: 160px; height: 53px;"></image>
+              <view class="weui-footer">
+                <view class="weui-footer__links">
+                  <navigator url="../../pages/help/help" class="weui-footer__link">Contact us</navigator>
+                </view>
+                <view class="weui-footer__text">Copyright © 2019-2020 TJU.sport</view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+
+        <view hidden="{{activeIndex !=1}}">
+          <view class="page" style="margin-top:30px">
+            <view class="page__bd page__bd_spacing">
+              <view class="kind-list">
+                <block wx:for="{{list2}}" wx:key="id">
+                  <view class="kind-list__item">
+                    <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle2">
+                      <view class="weui-flex__item">{{item.name}}</view>
+                      <image class="kind-list__img" src="../../pages/example/images/icon_nav_{{item.id}}.png"></image>
+                    </view>
+                    <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
+                      <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
+                        <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*this">
+                          <navigator url="../../pages/{{page}}/{{page}}" class="weui-cell weui-cell_access">
+                            <view class="weui-cell__bd">{{page}}</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                          </navigator>
+                        </block>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+              </view>
+            </view>
+            <view class="sort-wrap">
+              <view class="sort-btn" bindtap="zonghe">
+                Rank
+              </view>
+              <view class="sort-btn" data-index="{{daindex1}}" bindtap="choosesort1">
+                Most sold
+                <image src="{{imageurl1}}"></image>
+              </view>
+              <view class="sort-btn" data-index="{{daindex2}}" bindtap="choosesort2">
+                Price
+                <image src="{{imageurl2}}"></image>
+              </view>
+            </view>
+            <template name="msgTemp">
+              <view class="page__bd">
+                <view class="weui-panel">
+                  <view class="weui-panel__bd">
+                    <view class="weui-cell__hd">
+                      <view class="imageshow">
+                        <image src="{{src}}" style="margin-top:10px;margin-bottom:10px" mode="widthFix" bindtap="seemore" data-name="{{id}}" />
+                      </view>
+                    </view>
+                    <view class="weui-panel_blank">
+                      <view class="weui-media-box weui-media-box_text">
+                        <view class="weui-media-box__title weui-media-box__title_in-text">{{title}}</view>
+                        <view class="weui-media-box__desc">{{text_simple}}</view>
+                        <view class="weui-media-box__info">
+                          <view class="weui-media-box__info__meta">{{jiage}}$</view>
+                          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{time}}</view>
+                          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">Sold:{{xiaoliang}}</view>
+                        </view>
+
+                      </view>
+                    </view>
+                  </view>
+                  <view class="weui-panel__ft weui-panel_blank">
+                    <view class="weui-cell weui-cell_access weui-cell_link" bindtap="seemore" data-name="{{id}}">
+                      <view class="weui-cell__bd">View more</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+                    <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{edit}}" bindtap="editList" data-name="{{id}}">
+                      <view class="weui-cell__bd">Edit</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+                  </view>
+
+                </view>
+
+              </view>
+            </template>
+            <template is="msgTemp" wx:for="{{msgList}}" wx:key="id" data="{{...item}}" />
+
+            <view class="page__ft">
+              <image src="../../pages/example/images/icon_footer.png" style="width: 160px; height: 53px;"></image>
+
+              <view class="weui-footer">
+                <view class="weui-footer__links">
+                  <navigator url="../../pages/help/help" class="weui-footer__link">Contact us</navigator>
+                </view>
+                <view class="weui-footer__text">Copyright © 2019-2020 TJU.sport</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view hidden="{{activeIndex != 2}}">
+          <view class="page__bd page__bd_spacing" style="margin-top:30px">
+            <view class="kind-list">
+              <block wx:for="{{list3}}" wx:key="id">
+                <view class="kind-list__item">
+                  <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle3">
+                    <view class="weui-flex__item">{{item.name}}</view>
+                    <image class="kind-list__img" src="../../pages/example/images/icon_nav_{{item.id}}.png"></image>
+                  </view>
+                  <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
+                    <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
+                      <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*this">
+                        <navigator url="../../pages/{{page}}/{{page}}" class="weui-cell weui-cell_access">
+                          <view class="weui-cell__bd">{{page}}</view>
+                          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                      </block>
+                    </view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+
+          <template name="groupTemp">
+            <view class="page__bd">
+              <view class="weui-panel">
+                <view class="weui-panel__bd">
+                  <view class="weui-panel_blank">
+                    <view class="weui-media-box weui-media-box_text">
+                      <view class="weui-media-box__title weui-media-box__title_in-text">{{title}}</view>
+                      <view class="weui-media-box__desc">{{text_simple}}</view>
+                      <view class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{time}}</view>
+                      </view>
+
+                    </view>
+                  </view>
+                </view>
+                <view class="weui-panel__ft weui-panel_blank">
+                  <view class="weui-cell weui-cell_access weui-cell_link" bindtap="seemore_group" data-name="{{id}}">
+                    <view class="weui-cell__bd">View more</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                  </view>
+                  <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{edit}}" bindtap="editList_group" data-name="{{id}}">
+                    <view class="weui-cell__bd">Edit</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </template>
+          <template is="groupTemp" wx:for="{{groupList}}" wx:key="id" data="{{...item}}" />
+
+          <view class="page__ft">
+            <image src="../../pages/example/images/icon_footer.png" style="width: 160px; height: 53px;"></image>
+
+            <view class="weui-footer">
+              <view class="weui-footer__links">
+                <navigator url="../../pages/help/help" class="weui-footer__link">Contact us</navigator>
+              </view>
+              <view class="weui-footer__text">Copyright © 2019-2020 TJU.sport</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
